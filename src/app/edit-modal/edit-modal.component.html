@@ -1,0 +1,45 @@
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Static modal</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <h1>{{test}}</h1><br>
+          <div class="col-md-6">
+            <div class="container">
+              <img [src]="book.imgSmall" class="book-img img-rounded" [alt]="book.title">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <form (submit)="submitEdit($event)">
+              <div class="form-group">
+                <label for="title">Title:</label>
+                <input [(ngModel)]="book.title" type="text" class="form-control" id="title" name="title">
+              </div>
+              <div class="form-group">
+                <label for="publisher">Publisher:</label>
+                <input [(ngModel)]="book.publisher" type="text" class="form-control" id="publisher" name="publisher">
+              </div>
+              <div class="form-group">
+                <label for="author">Author:</label>
+                <input [(ngModel)]="book.author" type="text" class="form-control" id="author" name="author">
+              </div>
+              <div class="form-group">
+                <label for="note">Note:</label>
+                <input [(ngModel)]="book.note" type="text" class="form-control" id="note" name="note">
+              </div>
+              <hr>
+              <button type="submit" class="btn btn-md btn-primary btn-block">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

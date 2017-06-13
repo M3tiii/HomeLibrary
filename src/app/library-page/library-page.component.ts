@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LibraryService } from '../library.service'
 import { StorageService } from '../storage.service'
 import { SearcherComponent } from '../searcher/searcher.component';
+import { EditModalComponent } from '../edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-library-page',
@@ -12,6 +13,7 @@ import { SearcherComponent } from '../searcher/searcher.component';
 export class LibraryPageComponent implements OnInit {
 
   @ViewChild(SearcherComponent) searcher;
+  @ViewChild(EditModalComponent) editModal;
 
   private libraryName: string;
   private collection: any[];
@@ -37,26 +39,49 @@ export class LibraryPageComponent implements OnInit {
     // });
   }
 
-  saveBook(book) {
-    this.collection.push({ id: book.selfLink, title: book.volumeInfo.title, imgLarge: book.volumeInfo.imageLinks.large });
-    // console.log(this.libraryName, this.collection);
-    this.storage.updateLibrary(this.libraryName, this.collection).then(res => {
-      console.log(res);
+  loadBook(book) {
+    this.editModal.set(book);
+  }
+
+  saveEditedBook(book) {
+    this.fetchCollection().then(() => {
+      this.collection.push(book);
+      this.storage.updateLibrary(this.libraryName, this.collection).then(res => {
+        if (res.error)
+          console.log(res.error);
+      });
+    });
+  }
+
+  deleteBook(book) {
+    this.fetchCollection().then(() => {
+      const bookIndex = this.collection.indexOf(book);
+      if (bookIndex !== -1) {
+        this.collection.splice(bookIndex, 1);
+      }
+      console.log(bookIndex, this.collection);
+      this.storage.updateLibrary(this.libraryName, this.collection).then(res => {
+        if (res.error)
+          console.log(res.error);
+      });
+    });
+  }
+
+  fetchCollection() {
+    return this.storage.getLibrary(this.libraryName).then(res => {
+      if (!res.error) {
+        this.collection = res.data;
+        this.searcher.set(this.libraryName, this.collection);
+      } else {
+        console.log(res.error);
+      }
     });
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.libraryName = params.id;
-      this.storage.getLibrary(this.libraryName).then(res => {
-        if (!res.error) {
-          this.collection = res.data;
-          this.searcher.set(this.libraryName, this.collection);
-          // console.log(res, this.searcher);
-        } else {
-          console.log(res.error);
-        }
-      });
+      this.fetchCollection();
     });
   }
 

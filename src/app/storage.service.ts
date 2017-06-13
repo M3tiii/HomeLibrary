@@ -9,6 +9,7 @@ export class StorageService {
   public isLogged = new BehaviorSubject(null);
 
   URL: string = 'http://localhost:8000/';
+  userId: string;
   userName: string;
   userPassword: string;
   userEmail: string;
@@ -34,6 +35,7 @@ export class StorageService {
   }
 
   clearLocal() {
+    this.userId = '';
     this.userName = '';
     this.userPassword = '';
     this.userEmail = '';
@@ -41,10 +43,15 @@ export class StorageService {
   }
 
   saveLocal(res) {
+    this.userId = res._id;
     this.userName = res.username;
     this.userPassword = res.password;
     this.userEmail = res.email;
     this.userMembers = res.members;
+  }
+
+  sendInvitation(link) {
+    return this.get(link + '/' + this.userName);
   }
 
   registerUser(username, password, email) {
@@ -65,10 +72,9 @@ export class StorageService {
     const packet = JSON.stringify({
       username: this.userName,
       password: this.userPassword,
-      data,
+      data: JSON.stringify(data),
       members
     });
-    console.log(packet);
     return this.put('library/' + username, packet);
   }
 

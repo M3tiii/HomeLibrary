@@ -19,7 +19,7 @@ export class RegistrationPageComponent implements OnInit {
 
   register(event, username, email, password) {
     event.preventDefault();
-    this.storage.registerUser(username, email, password).then(res => {
+    this.storage.registerUser(username, password, email).then(res => {
       console.log('Register', res);
       if (!res.error) {
         this.error = null;

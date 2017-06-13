@@ -1,6 +1,7 @@
 <div class="container">
   <div class="book-element col-md-4 col-sm-6" *ngFor="let book of collection">
-    <img [src]="book.imgLarge" class="book-img img-rounded" [alt]="book.title">
+    <img [src]="book.imgMedium" class="book-img img-rounded" [alt]="book.title">
   </div>
-  <searcher #searchComponent (saveBookEmitter)="saveBook($event)"></searcher>
+  <searcher #searchComponent (saveBookEmitter)="loadBook($event)"></searcher>
+  <edit-modal #editModal (saveEditedBookEmitter)="saveEditedBook($event)"></edit-modal>
 </div>

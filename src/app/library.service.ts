@@ -17,7 +17,6 @@ export class LibraryService {
     params.set('q', query);
     params.set('key', this.KEY);
 
-
     let requestOptions = new RequestOptions();
     requestOptions.search = params;
 

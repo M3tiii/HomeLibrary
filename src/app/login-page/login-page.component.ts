@@ -14,7 +14,7 @@ export class LoginPageComponent implements OnInit {
   constructor(private storage: StorageService, private router: Router) { }
 
   ngOnInit() {
-    this.loginWithUsername({}, 'tt1', '1');
+    this.loginWithUsername({}, 't1', '1');
   }
 
   loginWithUsername(event, username, password) {

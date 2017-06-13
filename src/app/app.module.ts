@@ -4,21 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ModalModule } from 'ngx-bootstrap';
+
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
-
-import { StorageService } from './storage.service';
-import { FirebaseService } from './firebase.service';
-import { LibraryService } from './library.service';
-
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SearcherComponent } from './searcher/searcher.component';
 import { LibraryPageComponent } from './library-page/library-page.component';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
+
+import { StorageService } from './storage.service';
+import { LibraryService } from './library.service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA66R4ZKUKgB-k1SvbfZU51T5yLW-4FeLQ",
@@ -40,23 +37,21 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     RegistrationPageComponent,
     LoginPageComponent,
     HomePageComponent,
     SearcherComponent,
-    LibraryPageComponent
+    LibraryPageComponent,
+    EditModalComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule, // imports firebase/database, only needed for database features
-    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    ModalModule.forRoot()
   ],
-  providers: [StorageService, FirebaseService, LibraryService],
+  providers: [StorageService, LibraryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

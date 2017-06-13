@@ -13,6 +13,14 @@ export class HomePageComponent implements OnInit {
     // console.log(this.storage.userMembers);
   }
 
+  getInvitation(link) {
+    if (link.substring(0, 10) == 'addmember/' && link.substring(10, 11) != '/') {
+      this.storage.sendInvitation(link).then(res => {
+        console.log(res);
+      });
+    }
+  }
+
   ngOnInit() {
 
   }

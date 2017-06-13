@@ -4,7 +4,7 @@
       <a class="navbar-brand" [routerLink]="['/home']">HomeLibrary</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a *ngIf="isLoggedIn" [routerLink]="['/library', userName]">Library</a></li>
+      <li><a *ngIf="isLoggedIn" [routerLink]="['/library', userName]">My Library</a></li>
       <li><a *ngIf="isLoggedIn">Members</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">

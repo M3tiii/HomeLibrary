@@ -16,7 +16,6 @@ export class AppComponent {
   constructor(public storage: StorageService, private router: Router) {
     this.storage.isLogged.subscribe(
       (auth) => {
-        console.log(auth);
         if (auth == false) {
           console.log("Not Logged in.");
           this.isLoggedIn = false;

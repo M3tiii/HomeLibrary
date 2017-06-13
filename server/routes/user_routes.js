@@ -66,6 +66,7 @@ module.exports = function(app, db, mailer) {
     db.collection('users').findOne({
       _id: new ObjectID(req.params.id)
     }, function(error, fromUser) {
+      console.log(new ObjectID(req.params.id));
       if (!fromUser) {
         res.send({
           'error': 'That user does not exist'
@@ -96,7 +97,7 @@ module.exports = function(app, db, mailer) {
                 });
                 return
               } else {
-                toUser.members.push(toUser.username);
+                toUser.members.push(fromUser.username);
                 library.members.push(req.params.newuser);
                 db.collection('users').update({
                   '_id': new ObjectID(toUser._id)
