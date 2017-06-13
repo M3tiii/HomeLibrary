@@ -1,0 +1,6 @@
+<div class="container">
+  <div class="library-element col-md-4 col-sm-6" *ngFor="let library of this.storage.userMembers">
+    <h1>{{library}}</h1>
+    <a class="btn btn-default" [routerLink]="['/library', library]">Open library</a>
+  </div>
+</div>
