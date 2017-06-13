@@ -10,38 +10,51 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 export class EditModalComponent implements OnInit {
 
   @Output() saveEditedBookEmitter = new EventEmitter();
+  @Output() putEditedEmitter = new EventEmitter();
+
   @ViewChild(ModalDirective) childModal;
 
+  private edited = false;
+
   private book = {
+    id: '',
     title: '',
     publisher: '',
     author: '',
     note: '',
     imgSmall: '',
-    imgMedium: ''
+    imgMedium: '',
+    isReading: false,
+    duration: 0
   };
 
   constructor() { }
 
   public set(book) {
-    console.log(book);
+    this.edited = false;
+    this.book.id = book.id;
     this.book.imgSmall = book.volumeInfo.imageLinks.small
     this.book.imgMedium = book.volumeInfo.imageLinks.medium
     this.book.title = book.volumeInfo.title;
     this.book.publisher = book.volumeInfo.publisher;
     this.book.author = book.volumeInfo.authors[0];
     this.book.note = '';
-    // console.log(this.book, book);
     this.showChildModal();
   }
 
-  private submitEdit(ev) {
-    this.saveEditedBookEmitter.emit(this.book);
-    this.hideChildModal();
+  public editBook(book) {
+    this.edited = true;
+    this.book = book;
+    this.showChildModal();
   }
 
-  ngOnInit() {
-    // console.log(this.book);
+  public submitEdit(ev) {
+    if (this.edited) {
+      this.putEditedEmitter.emit(this.book);
+    } else {
+      this.saveEditedBookEmitter.emit(this.book);
+    }
+    this.hideChildModal();
   }
 
   public showChildModal(): void {
@@ -50,6 +63,9 @@ export class EditModalComponent implements OnInit {
 
   public hideChildModal(): void {
     this.childModal.hide();
+  }
+
+  ngOnInit() {
   }
 
 }

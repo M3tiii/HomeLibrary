@@ -1,5 +1,3 @@
-.wrapper {}
-
 .book-element {
   padding-top: 10px;
 }
@@ -8,11 +6,6 @@
   height: 200px;
   width: 140px;
 }
-
-
-/*.book-img:hover {
-  height: 200px;
-}*/
 
 .book-img:hover+.book-button, .book-button:hover {
   visibility: visible;

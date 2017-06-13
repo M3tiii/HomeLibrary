@@ -2,3 +2,13 @@
   height: 400px;
   width: 300px;
 }
+
+.book-element {
+  position: relative;
+}
+
+.book-element .link {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

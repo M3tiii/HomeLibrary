@@ -9,14 +9,16 @@ import { StorageService } from '../storage.service'
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private storage: StorageService, private library: LibraryService) {
-    // console.log(this.storage.userMembers);
-  }
+  constructor(private storage: StorageService, private library: LibraryService) { }
 
   getInvitation(link) {
     if (link.substring(0, 10) == 'addmember/' && link.substring(10, 11) != '/') {
       this.storage.sendInvitation(link).then(res => {
-        console.log(res);
+        if (!res.error) {
+          this.storage.userMembers.push(res.username);
+        } else {
+          console.log(res.error);
+        }
       });
     }
   }

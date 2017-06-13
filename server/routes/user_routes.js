@@ -118,8 +118,8 @@ module.exports = function(app, db, mailer) {
                     });
                     return;
                   }
-                  res.send("You are added to " + fromUser.username + " library.");
                 });
+                res.send(fromUser);
               }
             })
           }
@@ -188,7 +188,7 @@ module.exports = function(app, db, mailer) {
           let text = `<h1>Hello ${req.body.username}</h1>\n<p>Accept your account\n</p><a href='http://localhost:8000/accept/${user._id}'>ACCEPT ✔</a>`;
           const mailOptions = {
             from: 'mySuperAnnonymusMail@gmail.com',
-            to: 'mySuperAnnonymusMail@gmail.com',
+            to: user.email,
             subject: 'Email Example',
             html: text
           };

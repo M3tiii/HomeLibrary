@@ -25,6 +25,10 @@ export class StorageService {
     return this.get('user/' + name);
   }
 
+  refresh() {
+    return this.login(this.userName, this.userPassword);
+  }
+
   login(username, password) {
     const packet = JSON.stringify({
       username,

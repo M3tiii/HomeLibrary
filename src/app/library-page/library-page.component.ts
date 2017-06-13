@@ -20,23 +20,6 @@ export class LibraryPageComponent implements OnInit {
 
   constructor(private library: LibraryService, private storage: StorageService, private route: ActivatedRoute) {
     this.collection = this.library.collection;
-    // console.log(this.collection);
-    //
-    // this.storage.getUser('marek3').then(res => {
-    //   console.log(res);
-    // });
-
-    // this.storage.createUser('marek4', '1', '1').then(res => {
-    //   // console.log(res);
-    // });
-    //
-    // this.storage.getLibrary('marek5').then(res => {
-    //   console.log(res);
-    // });
-    // //
-    // this.storage.updateLibrary('marek5').then(res => { //serwer sie laguje jak nie ma praw trzba zatrzymac bo czeka na promise chyba
-    //   console.log(res);
-    // });
   }
 
   loadBook(book) {
@@ -45,7 +28,30 @@ export class LibraryPageComponent implements OnInit {
 
   saveEditedBook(book) {
     this.fetchCollection().then(() => {
-      this.collection.push(book);
+      let repeat = this.collection.find(b => b.id == book.id);
+      console.log(repeat);
+      if (!repeat) {
+        this.collection.push(book);
+        this.storage.updateLibrary(this.libraryName, this.collection).then(res => {
+          if (res.error)
+            console.log(res.error);
+        });
+      } else {
+        console.log("Juz posiadasz tą książkę");
+      }
+    });
+  }
+
+  showDetails(book) {
+    this.editModal.editBook(book);
+  }
+
+  putEdited(book) {
+    this.fetchCollection().then(() => {
+      const index = this.findBook(book);
+      if (index !== -1) {
+        this.collection[index] = book;
+      }
       this.storage.updateLibrary(this.libraryName, this.collection).then(res => {
         if (res.error)
           console.log(res.error);
@@ -55,16 +61,48 @@ export class LibraryPageComponent implements OnInit {
 
   deleteBook(book) {
     this.fetchCollection().then(() => {
-      const bookIndex = this.collection.indexOf(book);
-      if (bookIndex !== -1) {
-        this.collection.splice(bookIndex, 1);
+      const index = this.findBook(book);
+      if (index !== -1) {
+        this.collection.splice(index, 1);
       }
-      console.log(bookIndex, this.collection);
       this.storage.updateLibrary(this.libraryName, this.collection).then(res => {
         if (res.error)
           console.log(res.error);
       });
     });
+  }
+
+  findBook(book) {
+    let index = -1;
+    this.collection.forEach((b, i) => {
+      if (b.id == book.id)
+        index = i;
+    });
+    return index;
+  }
+
+  toggleReaging(book, state) {
+    this.fetchCollection().then(() => {
+      const index = this.findBook(book);
+      this.collection[index].isReading = state;
+
+      if (state == false) {
+        this.collection[index].endTime = JSON.stringify(new Date().getTime());
+        const time = this.collection[index].endTime - this.collection[index].startTime;
+        this.collection[index].duration += time / 60000;
+      } else {
+        this.collection[index].startTime = JSON.stringify(new Date().getTime());
+      }
+
+      this.storage.updateLibrary(this.libraryName, this.collection).then(res => {
+        if (res.error)
+          console.log(res.error);
+      });
+    });
+  }
+
+  round(time) {
+    return Math.round(time * 100) / 100
   }
 
   fetchCollection() {

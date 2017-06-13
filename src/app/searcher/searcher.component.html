@@ -1,6 +1,8 @@
-<div class="container">
-  <input type="text" class="form-control" id="searchBooksInput" placeholder="type your book..." [(ngModel)]="searchText" (change)="onType($event)">
-  <div class="row wraper">
+<div class="container wrapper">
+  <div class="input-search">
+    <input type="text" class="form-control" id="searchBooksInput" placeholder="type your book..." [(ngModel)]="searchText" (change)="onType($event)">
+  </div>
+  <div class="row">
     <div class="container">
       <div class="book-element col-md-2 col-sm-6" *ngFor="let book of searchResult">
         <img [src]="book.volumeInfo.imageLinks?.thumbnail" class="book-img img-rounded" [alt]="book.volumeInfo.title">

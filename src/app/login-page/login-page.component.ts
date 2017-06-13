@@ -14,12 +14,11 @@ export class LoginPageComponent implements OnInit {
   constructor(private storage: StorageService, private router: Router) { }
 
   ngOnInit() {
-    this.loginWithUsername({}, 't1', '1');
+    // this.loginWithUsername({}, 't1', '1');
   }
 
   loginWithUsername(event, username, password) {
     this.storage.login(username, password).then(res => {
-      console.log('Login', res);
       if (!res.error) {
         this.error = null;
         this.storage.saveLocal(res);
