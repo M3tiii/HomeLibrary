@@ -3,12 +3,25 @@
   width: 300px;
 }
 
+.black {
+  filter: brightness(50%);
+}
+
 .book-element {
   position: relative;
+  padding-bottom: 50px;
+  margin-bottom: 10px;
 }
 
 .book-element .link {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: 0px;
+}
+
+.book-element .link a {
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
 }

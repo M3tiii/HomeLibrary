@@ -13,11 +13,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(private storage: StorageService, private router: Router) { }
 
-  ngOnInit() {
-    // this.loginWithUsername({}, 't1', '1');
-  }
-
-  loginWithUsername(event, username, password) {
+  private loginWithUsername(event, username, password) {
     this.storage.login(username, password).then(res => {
       if (!res.error) {
         this.error = null;
@@ -27,5 +23,9 @@ export class LoginPageComponent implements OnInit {
         this.error = res.error;
       }
     })
+  }
+
+  ngOnInit() {
+    // this.loginWithUsername({}, 't1', '1');
   }
 }

@@ -20,14 +20,22 @@ export class SearcherComponent implements OnInit {
     // console.log(libraryName, collection);
   }
 
-  onType(event) {
+  private onType(event) {
     this.library.get(this.searchText).then(res => {
       this.searchResult = res.items;
       // console.log(this.searchResult);
     })
   }
 
-  saveBook(book) {
+  private getImage(book) {
+    if (book.volumeInfo.imageLinks) {
+      const tmpImg = book.volumeInfo.imageLinks[Object.keys(book.volumeInfo.imageLinks)[0]];
+      return book.volumeInfo.imageLinks.thumbnail ? book.volumeInfo.imageLinks.thumbnail : tmpImg;
+    }
+    return '';
+  }
+
+  private saveBook(book) {
     this.library.getDetail(book.id).then(result => {
       // console.log(result, this.saveBookEmitter);
       // this.library.collection.push(result);

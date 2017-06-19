@@ -5,7 +5,7 @@
   <div class="row">
     <div class="container">
       <div class="book-element col-md-2 col-sm-6" *ngFor="let book of searchResult">
-        <img [src]="book.volumeInfo.imageLinks?.thumbnail" class="book-img img-rounded" [alt]="book.volumeInfo.title">
+        <img [src]="getImage(book)" class="book-img img-rounded" [alt]="book.volumeInfo.title">
         <button class="book-button btn btn-default" (click)="saveBook(book)">+</button>
       </div>
     </div>

@@ -22,11 +22,11 @@ export class LibraryPageComponent implements OnInit {
     this.collection = this.library.collection;
   }
 
-  loadBook(book) {
+  private loadBook(book) {
     this.editModal.set(book);
   }
 
-  saveEditedBook(book) {
+  private saveEditedBook(book) {
     this.fetchCollection().then(() => {
       let repeat = this.collection.find(b => b.id == book.id);
       console.log(repeat);
@@ -42,11 +42,11 @@ export class LibraryPageComponent implements OnInit {
     });
   }
 
-  showDetails(book) {
+  private showDetails(book) {
     this.editModal.editBook(book);
   }
 
-  putEdited(book) {
+  private putEdited(book) {
     this.fetchCollection().then(() => {
       const index = this.findBook(book);
       if (index !== -1) {
@@ -59,7 +59,7 @@ export class LibraryPageComponent implements OnInit {
     });
   }
 
-  deleteBook(book) {
+  private deleteBook(book) {
     this.fetchCollection().then(() => {
       const index = this.findBook(book);
       if (index !== -1) {
@@ -72,7 +72,7 @@ export class LibraryPageComponent implements OnInit {
     });
   }
 
-  findBook(book) {
+  private findBook(book) {
     let index = -1;
     this.collection.forEach((b, i) => {
       if (b.id == book.id)
@@ -81,7 +81,7 @@ export class LibraryPageComponent implements OnInit {
     return index;
   }
 
-  toggleReaging(book, state) {
+  private toggleReaging(book, state) {
     this.fetchCollection().then(() => {
       const index = this.findBook(book);
       this.collection[index].isReading = state;
@@ -101,11 +101,11 @@ export class LibraryPageComponent implements OnInit {
     });
   }
 
-  round(time) {
+  private round(time) {
     return Math.round(time * 100) / 100
   }
 
-  fetchCollection() {
+  private fetchCollection() {
     return this.storage.getLibrary(this.libraryName).then(res => {
       if (!res.error) {
         this.collection = res.data;

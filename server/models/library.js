@@ -15,7 +15,15 @@ var librarySchema = new Schema({
   },
   data: [{
     id: String,
-    free: Boolean
+    // free: Boolean
+    title: String,
+    publisher: String,
+    author: String,
+    note: String,
+    imgSmall: String,
+    imgMedium: String,
+    isReading: Boolean,
+    duration: Number
   }],
   members: [{
     username: String,

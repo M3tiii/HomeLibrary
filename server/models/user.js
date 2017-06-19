@@ -17,6 +17,10 @@ var userSchema = new Schema({
     type: String,
     required: true
   },
+  registration: {
+    type: String,
+    required: true
+  },
   members: [{
     username: String,
   }],

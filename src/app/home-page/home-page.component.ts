@@ -11,7 +11,7 @@ export class HomePageComponent implements OnInit {
 
   constructor(private storage: StorageService, private library: LibraryService) { }
 
-  getInvitation(link) {
+  private getInvitation(link) {
     if (link.substring(0, 10) == 'addmember/' && link.substring(10, 11) != '/') {
       this.storage.sendInvitation(link).then(res => {
         if (!res.error) {

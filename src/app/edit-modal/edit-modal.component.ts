@@ -31,10 +31,12 @@ export class EditModalComponent implements OnInit {
   constructor() { }
 
   public set(book) {
+    this.book = book;
     this.edited = false;
     this.book.id = book.id;
-    this.book.imgSmall = book.volumeInfo.imageLinks.small
-    this.book.imgMedium = book.volumeInfo.imageLinks.medium
+    const tmpImage = book.volumeInfo.imageLinks[Object.keys(book.volumeInfo.imageLinks)[0]];
+    this.book.imgSmall = book.volumeInfo.imageLinks.small ? book.volumeInfo.imageLinks.small : tmpImage;
+    this.book.imgMedium = book.volumeInfo.imageLinks.medium ? book.volumeInfo.imageLinks.medium : tmpImage;
     this.book.title = book.volumeInfo.title;
     this.book.publisher = book.volumeInfo.publisher;
     this.book.author = book.volumeInfo.authors[0];
@@ -43,6 +45,7 @@ export class EditModalComponent implements OnInit {
   }
 
   public editBook(book) {
+    this.book = book;
     this.edited = true;
     this.book = book;
     this.showChildModal();

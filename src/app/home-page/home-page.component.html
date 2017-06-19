@@ -10,11 +10,16 @@
       <button class="btn btn-secondary" type="button" (click)="getInvitation(textInvitation.value)">Send</button>
     </span>
     </div>
-
-    <h1>Shared library</h1>
-    <div class="library-element col-md-4 col-sm-6" *ngFor="let library of this.storage.userMembers">
-      <h1>{{library}}</h1>
-      <a class="btn btn-default" [routerLink]="['/library', library]">Open library</a>
+    <div class="shared-library">
+      <h1>Shared library</h1>
+      <div class="library-element col-md-4 col-sm-6 " *ngFor="let library of this.storage.userMembers">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h1>{{library}}</h1>
+            <a class="btn btn-default btn-primary" [routerLink]="['/library', library]">Open library</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

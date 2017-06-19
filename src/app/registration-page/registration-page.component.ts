@@ -13,22 +13,22 @@ export class RegistrationPageComponent implements OnInit {
 
   constructor(private storage: StorageService, private router: Router) { }
 
-  ngOnInit() {
-
-  }
-
-  register(event, username, email, password) {
+  private register(event, username, email, password) {
     event.preventDefault();
     this.storage.registerUser(username, password, email).then(res => {
       console.log('Register', res);
       if (!res.error) {
         this.error = null;
-        this.storage.saveLocal(res);
-        this.storage.isLogged.next(true);
-        this.router.navigate(['']);
+        //this.storage.saveLocal(res);
+        //this.storage.isLogged.next(true);
+        this.router.navigate(['/login']);
       } else {
         this.error = res.error;
       }
     });
+  }
+
+  ngOnInit() {
+
   }
 }
