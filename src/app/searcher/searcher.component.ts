@@ -30,7 +30,7 @@ export class SearcherComponent implements OnInit {
   private getImage(book) {
     if (book.volumeInfo.imageLinks) {
       const tmpImg = book.volumeInfo.imageLinks[Object.keys(book.volumeInfo.imageLinks)[0]];
-      return book.volumeInfo.imageLinks.thumbnail ? book.volumeInfo.imageLinks.thumbnail : tmpImg;
+      return book.volumeInfo.imageLinks.hasOwnProperty('thumbnail') ? book.volumeInfo.imageLinks.thumbnail : tmpImg;
     }
     return '';
   }

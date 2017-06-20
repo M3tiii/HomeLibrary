@@ -17,15 +17,6 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { StorageService } from './storage.service';
 import { LibraryService } from './library.service';
 
-export const firebaseConfig = {
-  apiKey: "AIzaSyA66R4ZKUKgB-k1SvbfZU51T5yLW-4FeLQ",
-  authDomain: "homelibrary-d9d99.firebaseapp.com",
-  databaseURL: "https://homelibrary-d9d99.firebaseio.com",
-  projectId: "homelibrary-d9d99",
-  storageBucket: "homelibrary-d9d99.appspot.com",
-  messagingSenderId: "145900807908"
-};
-
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'library/:id', component: LibraryPageComponent },

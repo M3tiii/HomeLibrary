@@ -15,7 +15,6 @@ var librarySchema = new Schema({
   },
   data: [{
     id: String,
-    // free: Boolean
     title: String,
     publisher: String,
     author: String,

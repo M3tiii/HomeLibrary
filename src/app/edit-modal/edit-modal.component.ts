@@ -34,12 +34,22 @@ export class EditModalComponent implements OnInit {
     this.book = book;
     this.edited = false;
     this.book.id = book.id;
-    const tmpImage = book.volumeInfo.imageLinks[Object.keys(book.volumeInfo.imageLinks)[0]];
-    this.book.imgSmall = book.volumeInfo.imageLinks.small ? book.volumeInfo.imageLinks.small : tmpImage;
-    this.book.imgMedium = book.volumeInfo.imageLinks.medium ? book.volumeInfo.imageLinks.medium : tmpImage;
-    this.book.title = book.volumeInfo.title;
-    this.book.publisher = book.volumeInfo.publisher;
-    this.book.author = book.volumeInfo.authors[0];
+    this.book.duration = 0;
+    console.log(this.book);
+    if (book.hasOwnProperty('volumeInfo')) {
+      if (book.volumeInfo.hasOwnProperty('imageLinks')) {
+        const tmpImage = book.volumeInfo.imageLinks[Object.keys(book.volumeInfo.imageLinks)[0]];
+        this.book.imgSmall = book.volumeInfo.imageLinks.hasOwnProperty('small') ? book.volumeInfo.imageLinks.small : tmpImage;
+        this.book.imgMedium = book.volumeInfo.imageLinks.hasOwnProperty('medium') ? book.volumeInfo.imageLinks.medium : tmpImage;
+      }
+
+      if (book.volumeInfo.hasOwnProperty('title'))
+        this.book.title = book.volumeInfo.title;
+      if (book.volumeInfo.hasOwnProperty('publisher'))
+        this.book.publisher = book.volumeInfo.publisher;
+      if (book.volumeInfo.hasOwnProperty('authors'))
+        this.book.author = book.volumeInfo.authors.length > 0 ? book.volumeInfo.authors[0] : '';
+    }
     this.book.note = '';
     this.showChildModal();
   }

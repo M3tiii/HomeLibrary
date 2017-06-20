@@ -2,7 +2,7 @@
   <div class="book-element col-md-4 col-sm-6" *ngFor="let book of collection">
     <img [src]="book.imgMedium" [ngClass]="{black: book.isReading}" class="book-img img-rounded" [alt]="book.title">
     <div class="link">
-      <div><a *ngIf="!book.isReading" class="btn btn-sm btn-default" (click)="toggleReaging(book, true)">Rent, Duration: {{round(book.duration)}}</a></div>
+      <div><a *ngIf="!book.isReading" class="btn btn-sm btn-default" (click)="toggleReaging(book, true)">Rent, Duration: {{round(book.duration)}} [m]</a></div>
       <div><a *ngIf="book.isReading" class="btn btn-sm btn-default" (click)="toggleReaging(book, false)">Return</a></div>
       <div><a class="btn btn-sm btn-default" (click)="showDetails(book)">Details</a></div>
       <div><a class="btn btn-sm btn-warning" (click)="deleteBook(book)">Remove</a></div>
