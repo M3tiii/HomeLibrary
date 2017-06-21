@@ -1,0 +1,16 @@
+<div class="container center">
+  <div class="personal-panel">
+    <h2>Personal</h2>
+    <hr>
+    <p>name: {{this.storage.userName}}</p>
+    <p>email: {{this.storage.userEmail}}</p>
+    <p>invitation link: addmember/{{this.storage.userId}}</p>
+    <p>library shared to {{this.storage.userMembers.length}} users</p>
+  </div>
+  <div class="statistic-panel">
+    <h2>Statistics</h2>
+    <hr>
+    <p>last read book: {{this.storage.userLastRead}}</p>
+    <p>total read time: {{this.storage.userTotalRead}} [m]</p>
+  </div>
+</div>

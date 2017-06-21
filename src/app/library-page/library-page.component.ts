@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LibraryService } from '../library.service'
-import { StorageService } from '../storage.service'
+import { LibraryService } from '../library.service';
+import { StorageService } from '../storage.service';
 import { SearcherComponent } from '../searcher/searcher.component';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
 
@@ -29,7 +29,6 @@ export class LibraryPageComponent implements OnInit {
   private saveEditedBook(book) {
     this.fetchCollection().then(() => {
       let repeat = this.collection.find(b => b.id == book.id);
-      console.log(repeat);
       if (!repeat) {
         this.collection.push(book);
         this.storage.updateLibrary(this.libraryName, this.collection).then(res => {
@@ -86,17 +85,24 @@ export class LibraryPageComponent implements OnInit {
       const index = this.findBook(book);
       this.collection[index].isReading = state;
 
+      const lastTitle = this.collection[index].title;
+      let lastTime = 0;
+
       if (state == false) {
         this.collection[index].endTime = JSON.stringify(new Date().getTime());
         const time = this.collection[index].endTime - this.collection[index].startTime;
-        this.collection[index].duration += time / 60000;
+        lastTime = time / 60000;
+        this.collection[index].duration += lastTime;
       } else {
         this.collection[index].startTime = JSON.stringify(new Date().getTime());
       }
 
-      this.storage.updateLibrary(this.libraryName, this.collection).then(res => {
-        if (res.error)
+      this.storage.updateLibrary(this.libraryName, this.collection, null, { lastTime, lastTitle }).then(res => {
+        if (res.error) {
           console.log(res.error);
+        } else {
+          this.storage.saveLocal(res);
+        }
       });
     });
   }

@@ -133,6 +133,8 @@ module.exports = function(app, db, mailer) {
       email: req.body.email,
       members: [req.body.username],
       registration: date.toISOString(),
+      lastRead: '',
+      totalRead: 0,
       accepted: false
     });
     const library = Library({

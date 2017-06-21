@@ -8,11 +8,13 @@ export class StorageService {
 
   public isLogged = new BehaviorSubject(null);
 
-  URL: string = 'http://localhost:8000/';
+  URL: string = 'https://myhomelibrary.herokuapp.com/';
   userId: string;
   userName: string;
   userPassword: string;
   userEmail: string;
+  userLastRead: string;
+  userTotalRead: number;
   userMembers: any[];
   headers: Headers = new Headers();
 
@@ -52,6 +54,8 @@ export class StorageService {
     this.userPassword = res.password;
     this.userEmail = res.email;
     this.userMembers = res.members;
+    this.userLastRead = res.lastRead;
+    this.userTotalRead = Math.round(res.totalRead * 100) / 100;
   }
 
   sendInvitation(link) {
@@ -72,13 +76,15 @@ export class StorageService {
     return this.get('library/' + username);
   }
 
-  updateLibrary(username, data = null, members = null) {
+  updateLibrary(username, data = null, members = null, userDetails = {}) {
     const packet = JSON.stringify({
       username: this.userName,
       password: this.userPassword,
       data: JSON.stringify(data),
+      userDetails: JSON.stringify(userDetails),
       members
     });
+    // console.log(userDetails);
     return this.put('library/' + username, packet);
   }
 

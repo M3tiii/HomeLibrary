@@ -1,6 +1,11 @@
 <div class="container wrapper">
   <div class="input-search">
-    <input type="text" class="form-control" id="searchBooksInput" placeholder="type your book..." [(ngModel)]="searchText" (change)="onType($event)">
+    <div class="input-group">
+      <input #textSearcher type="text" class="form-control" id="searchBooksInput" placeholder="type your book..." [(ngModel)]="searchText" (change)="onType($event)">
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)="onType(textSearcher.value)">Send</button>
+      </span>
+    </div>
   </div>
   <div class="row">
     <div class="container">

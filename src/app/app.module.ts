@@ -16,13 +16,15 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 import { StorageService } from './storage.service';
 import { LibraryService } from './library.service';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'library/:id', component: LibraryPageComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginPageComponent },
-  { path: 'register', component: RegistrationPageComponent }
+  { path: 'register', component: RegistrationPageComponent },
+  { path: 'profile', component: ProfilePageComponent }
 ];
 
 @NgModule({
@@ -33,7 +35,8 @@ const routes: Routes = [
     HomePageComponent,
     SearcherComponent,
     LibraryPageComponent,
-    EditModalComponent
+    EditModalComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,

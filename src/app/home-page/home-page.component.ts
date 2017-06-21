@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LibraryService } from '../library.service';
-import { StorageService } from '../storage.service'
+import { StorageService } from '../storage.service';
 
 @Component({
   selector: 'app-home-page',

@@ -24,6 +24,8 @@ var userSchema = new Schema({
   members: [{
     username: String,
   }],
+  lastRead: String,
+  totalRead: Number,
   accepted: Boolean
 });
 

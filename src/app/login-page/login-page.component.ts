@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { StorageService } from '../storage.service'
+import { StorageService } from '../storage.service';
 
 @Component({
   selector: 'app-login-page',
@@ -26,6 +26,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.loginWithUsername({}, 't1', '1');
+    // this.loginWithUsername({}, 'olek', '1234');
   }
 }
